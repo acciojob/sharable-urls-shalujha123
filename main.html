@@ -1,8 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <script type="text/javascript" src="./script.js">
-</script>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Manipulation</title>
+</head>
+<body>
 
+    <h3 id="url">https://localhost:8080/</h3>
+
+    <form id="form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        
+        <br><br>
+        
+        <label for="year">Graduation year:</label>
+        <input type="number" id="year" name="year">
+        
+        <br><br>
+
+        <button type="submit" id="button">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            const name = document.getElementById("name").value.trim();
+            const year = document.getElementById("year").value.trim();
+            
+            let queryParams = [];
+            if (name) queryParams.push(`name=${encodeURIComponent(name)}`);
+            if (year) queryParams.push(`year=${encodeURIComponent(year)}`);
+
+            const url = "https://localhost:8080/";
+            document.getElementById("url").textContent = queryParams.length ? `${url}?${queryParams.join("&")}` : url;
+        });
+    </script>
+
+</body>
 </html>
